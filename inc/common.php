@@ -9,4 +9,4 @@ require_once('autoloader.php');
 $db = new Db();
 $uri = new UriParser($db);
 
-$controller = new Controller($uri);
+$controller = new Controller($uri, $db);
