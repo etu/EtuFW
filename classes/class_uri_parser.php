@@ -13,7 +13,7 @@ class UriParser extends BasicObject {
 	 * 
 	 * @param &$db Send in a Db instance if you want too
 	 */
-	public function __construct(&$db = False) {
+	public function __construct(Db &$db) {
 		$structure = array('baseuri' => 'string', 'page' => 'string', 'action' => 'string', 'parts' => 'array');
 		parent::__construct($db, $structure, True);
 		
