@@ -20,22 +20,25 @@ class BasicObject {
 	 * @param $structure array Defines the structure of the data in the class
 	 * @param $strict bool Defines if the class should be strict on getters/setters or not
 	 */
-	public function __construct(&$db, $structure = False, $strict = False) {
+	public function __construct(&$db, Array $structure = Null, $strict = False) {
 		$this->initDb($db);
 		$this->strict = $strict;
 		
-		if($structure != False) {
-			$this->structure = $structure;
-		} else {
+		if($structure === Null)
 			$this->structure = array();
-		}
+		else
+			$this->structure = $structure;
+		
 	}
 	
 	private function initDb(&$db) {
-		if($db === False)
+		if(is_object($db)) {
+			if(get_class($db) === 'Db') {
+				$this->db = $db;
+			}
+		} else {
 			$this->db = new Db;
-		else
-			$this->db = $db;
+		}
 	}
 	
 	/**
