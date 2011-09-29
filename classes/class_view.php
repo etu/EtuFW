@@ -43,11 +43,11 @@ class View extends BasicObject {
 	 * Just renders the page
 	 */
 	public function render() {
-		if(count($this->data['data']) >= 1) /// @todo This block causes 500 internal server error if I don't give it data at all
+		if(count($this->data['data']) >= 1)
 			foreach($this->data['data'] as $key => $value)
 				$$key = $value;
 		
-		$_SERVER['DOCUMENT_ROOT'] = str_replace('http', 'views', $_SERVER['DOCUMENT_ROOT']); /// @todo replace the end of the string, not in the string
+		$_SERVER['DOCUMENT_ROOT'] = preg_replace('/http\/$/', 'views/', $_SERVER['DOCUMENT_ROOT']);
 		
 		$_view_file = $this->data['file'];
 		unset($this);
