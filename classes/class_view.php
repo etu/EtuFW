@@ -1,7 +1,7 @@
 <?php
 
 class View extends BasicObject {
-	public function __construct($name, &$db = False) {
+	public function __construct($name, Db &$db) {
 		$structure = array('data' => 'array', 'name' => 'string');
 		parent::__construct($db, $structure, True);
 		
