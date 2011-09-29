@@ -8,7 +8,7 @@
  * @copyright GNU Public License v3
  */
 
-class Db extends \PDO {
+class Db extends PDO {
 	public function __construct() {
 		$cfg = parse_ini_file('../config.ini', true);
 		$db = $cfg['Database'];
@@ -20,6 +20,6 @@ class Db extends \PDO {
 			die('Connection to database failed: '.$e->getMessage());
 		}
 		
-		$this->setAttribute(\PDO::ATTR_DEFAULT_FETCH_MODE, \PDO::FETCH_OBJ);
+		$this->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
 	}
 }
