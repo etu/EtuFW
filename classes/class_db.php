@@ -6,6 +6,7 @@
  *
  * @author Elis Axelsson <elis.axelsson@gmail.com>
  * @copyright GNU Public License v3
+ * @package EtuFW
  */
 
 class Db extends PDO {
