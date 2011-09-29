@@ -20,7 +20,7 @@ class Controller extends BasicObject {
 			require_once($file);
 			
 			$name = 'Controller'.$this->data['name'];
-			$this->data['controller'] = new $name($uri, $this->data['db']);
+			$this->data['controller'] = new $name($uri, $this->db);
 			
 			$action = $uri->action;
 			if($action === '')
