@@ -43,6 +43,8 @@ class View extends BasicObject {
 	 * Just renders the page
 	 */
 	public function render() {
+		$this->addData('_render_start', microtime());
+		
 		if(count($this->data['data']) >= 1)
 			foreach($this->data['data'] as $key => $value)
 				$$key = $value;
