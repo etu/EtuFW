@@ -17,7 +17,7 @@ class BasicObject {
 	 * Construction of class...
 	 * 
 	 * @param &$db Gets a Db class, maybe.
-	 * @param $structure array Defines the structure of the data in the class
+	 * @param $structure Defines the structure of the data in the class
 	 * @param $strict bool Defines if the class should be strict on getters/setters or not
 	 */
 	public function __construct(&$db, Array $structure = Null, $strict = False) {
