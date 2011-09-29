@@ -49,19 +49,14 @@ class BasicObject {
 	 * @returns true if succsess
 	 */
 	public function __set($key, $value) {
-		if($this->strict === True) {
-			if(isset($this->structure[$key])) {
-				settype($value, $this->structure[$key]);
-				$this->data[$key] = $value;
-			} else {
-				return false;
-			}
-		} else {
-			if(isset($this->structure[$key]))
-				settype($value, $this->structure[$key]);
-			
-			$this->data[$key] = $value;
-		}
+		if($this->strict === True && !isset($this->structure[$key]))
+			return false;
+		
+		if(isset($this->structure[$key]))
+			settype($value, $this->structure[$key]);
+		
+		$this->data[$key] = $value;
+		
 		return true;
 	}
 	
