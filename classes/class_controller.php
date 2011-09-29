@@ -1,7 +1,19 @@
 <?php
 
+/**
+ * Controller class, handles the controller loading and launches the action
+ * 
+ * @author Elis Axelsson <elis.axelsson@gmail.com>
+ * @copyright GNU Public License v3
+ */
+
 class Controller extends BasicObject {
-	
+	/**
+	 * Construction of class... When this constructor is done with the class, the class will almost act like the controller itself.
+	 * 
+	 * @param $uri The UriParser
+	 * @param $db  The Database instance
+	 */
 	public function __construct(UriParser &$uri, Db &$db) {
 		$structure = array('name' => 'string', 'controller' => 'Object');
 		parent::__construct($db, $structure, True);
@@ -32,10 +44,20 @@ class Controller extends BasicObject {
 			throw new Exception('No controller named: '.$this->data['name']);
 	}
 	
+	/**
+	 * Reimplemented to point to the controller inside
+	 * 
+	 * @see BasicObject::__get
+	 */
 	public function __get($key) {
 		return $this->controller->$key;
 	}
 	
+	/**
+	 * Reimplemented to point to the controller inside
+	 * 
+	 * @see BasicObject::__set
+	 */
 	public function __set($key, $value) {
 		return $this->controller->$key = $value;
 	}
