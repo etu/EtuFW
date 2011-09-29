@@ -2,7 +2,7 @@
 
 class Controller extends BasicObject {
 	
-	public function __construct(&$uri, &$db = False) {
+	public function __construct(UriParser &$uri, Db &$db) {
 		$structure = array('name' => 'string', 'controller' => 'Object');
 		parent::__construct($db, $structure, True);
 		
