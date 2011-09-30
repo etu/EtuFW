@@ -35,7 +35,7 @@ class BasicController extends BasicObject {
 			
 			$modelname = 'Model'.ucfirst($name);
 			
-			return new $modelname;
+			return new $modelname($this->db);
 		} else
 			throw new Exception('No Model named: '.$name);
 	}
