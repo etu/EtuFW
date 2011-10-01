@@ -28,7 +28,7 @@ class BasicController extends BasicObject {
 	 * @param $name modelname
 	 * @returns A Model Object
 	 */
-	public function model($name) {
+	protected function model($name) {
 		$file = '../models/'.strtolower($name).'.php';
 		if(file_exists($file)) {
 			require_once($file);
@@ -46,7 +46,7 @@ class BasicController extends BasicObject {
 	 * @param $name Name of your viewfile of choice
 	 * @returns A View object prepared with your viewfile
 	 */
-	public function view($name) {
+	protected function view($name) {
 		return new View($name, $this->db);
 	}
 }
