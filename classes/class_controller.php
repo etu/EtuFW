@@ -37,9 +37,12 @@ class Controller extends BasicObject {
 			
 			$action = $uri->action;
 			if($action === '')
-				$this->data['controller']->index();
-			else
+				$action = 'index';
+			
+			if(in_array($action, get_class_methods($this->data['controller'])))
 				$this->data['controller']->$action();
+			else
+				throw new Exception('No action named: '.$action);
 			
 		} else
 			throw new Exception('No controller named: '.$this->data['name']);
