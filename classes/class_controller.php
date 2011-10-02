@@ -10,7 +10,8 @@
 
 class Controller extends BasicObject {
 	/**
-	 * Construction of class... When this constructor is done with the class, the class will almost act like the controller itself.
+	 * Construction of class... When this constructor is done with the class, the
+	 * class will almost act like the controller itself.
 	 * 
 	 * @param $uri The UriParser
 	 * @param $db  The Database instance
