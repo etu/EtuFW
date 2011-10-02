@@ -9,4 +9,9 @@ require_once('autoloader.php');
 $db = new Db();
 $uri = new UriParser($db);
 
-$controller = new Controller($uri, $db);
+try {
+	$controller = new Controller($uri, $db);
+} catch (Exception $e) {
+	header("HTTP/1.0 404 Not Found");
+	echo $e."\n";
+  }
