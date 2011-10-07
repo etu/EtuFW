@@ -18,7 +18,7 @@ class UriParser extends BasicObject {
 		$structure = array('baseuri' => 'string', 'page' => 'string', 'action' => 'string', 'parts' => 'array');
 		parent::__construct($db, $structure, True);
 		
-		$this->baseuri = $_SERVER['REQUEST_URI'];
+		$this->baseuri = preg_replace('/\?.*/', '', $_SERVER['REQUEST_URI']);
 		
 		$cleanuri = preg_replace('/^\/index.php/', '', $this->baseuri);
 		$cleanuri = preg_replace('/^\//', '', $cleanuri);
