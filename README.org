@@ -1,0 +1,17 @@
+
+* About
+
+This is a small PHP Framework, it makes some kind of MVC structure.
+
+* Why?
+
+I looked for a job, and I got the jobtest to write a small blog in PHP, with a Object Oriented MVC structure. I was allowed to use external PHP libs, but no big frameworks. So I wrote the base of this framework in two days, and then the blog and sent it as jobtest.
+
+After that I feelt that I liked the framework and started my own project in it, and have fixed a bunch of bugs since I sent it to the company.
+
+And I will probably continue to maintain this for my future projects.
+
+* TODO
+
+I want a ORM, that would be cool.
+
