@@ -11,7 +11,7 @@ After that I feelt that I liked the framework and started my own project in it, 
 
 And I will probably continue to maintain this for my future projects.
 
-* TODO
+* Todo
 
 I want a ORM, that would be cool.
 
