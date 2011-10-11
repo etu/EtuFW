@@ -15,3 +15,7 @@ And I will probably continue to maintain this for my future projects.
 
 I want a ORM, that would be cool.
 
+* License
+
+eh, GPLv3 as it says in most of my files... :)
+
