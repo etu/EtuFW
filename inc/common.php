@@ -8,7 +8,7 @@ require_once('autoloader.php');
 
 $cfg = new Config();
 $db = new Db($cfg);
-$uri = new UriParser($db);
+$uri = new UriParser($db, $cfg);
 
 try {
 	$controller = new Controller($uri, $db);
