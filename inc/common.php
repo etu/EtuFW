@@ -7,7 +7,7 @@ set_include_path(get_include_path().':../inc:../classes');
 require_once('autoloader.php');
 
 $cfg = new Config();
-$db = new Db();
+$db = new Db($cfg);
 $uri = new UriParser($db);
 
 try {

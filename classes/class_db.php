@@ -10,9 +10,8 @@
  */
 
 class Db extends PDO {
-	public function __construct() {
-		$cfg = parse_ini_file('../config.ini', true);
-		$db = $cfg['Database'];
+	public function __construct(Config $cfg) {
+		$db = $cfg->getDatabase();
 		
 		$dsn = $db['driver'].':dbname='.$db['database'].';host='.$db['hostname'];
 		try {
