@@ -9,9 +9,12 @@
  */
 
 class Config {
-	protected $database;
-	protected $routing;
+	protected $database; ///< Contains the database options
+	protected $routing;  ///< Contains the routing options
 	
+	/**
+	 * Contstruction of Config, reads the ../config.ini file and parses it.
+	 */
 	public function __construct() {
 		$cfg = parse_ini_file('../config.ini', true);
 		
@@ -19,10 +22,16 @@ class Config {
 		$this->routing  = $cfg['Routing'];
 	}
 	
+	/**
+	 * @returns Array with Database configs
+	 */
 	public function getDatabase() {
 		return $this->database;
 	}
 	
+	/**
+	 * @returns Array with Routing configs
+	 */
 	public function getRouting() {
 		return $this->routing;
 	}
