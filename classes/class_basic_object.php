@@ -8,7 +8,7 @@
  * @package EtuFW
  */
 
-class BasicObject {
+abstract class BasicObject {
 	protected $db;             ///< For database instance
 	protected $data = array(); ///< Storage of data in the class
 	protected $strict;         ///< If the class should be strict or not in the setter
