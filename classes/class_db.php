@@ -10,6 +10,12 @@
  */
 
 class Db extends PDO {
+	/**
+	 * Fetches the config-options and uses PDO to connect to the database,
+	 * and kills the proccess with an error on connection failure.
+	 * 
+	 * @param $cfg The Config Object
+	 */
 	public function __construct(Config &$cfg) {
 		$db = $cfg->getDatabase();
 		
