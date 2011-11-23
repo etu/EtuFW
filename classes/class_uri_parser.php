@@ -12,7 +12,8 @@ class UriParser extends BasicObject {
 	/**
 	 * Constructor of class...
 	 * 
-	 * @param &$db Send in a Db instance if you want too
+	 * @param $db Send in a Db instance if you want too
+	 * @param $cfg Requires the Config class
 	 */
 	public function __construct(Db &$db, Config &$cfg) {
 		$structure = array('baseuri' => 'string', 'page' => 'string', 'action' => 'string', 'parts' => 'array');
