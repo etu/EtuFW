@@ -11,7 +11,7 @@ $db = new Db($cfg);
 $uri = new UriParser($db, $cfg);
 
 try {
-	$controller = new Controller($uri, $db);
+	$controller = new Controller($uri, $db, $cfg);
 } catch (Exception $e) {
 	header("HTTP/1.0 404 Not Found");
 	echo $e."\n";
