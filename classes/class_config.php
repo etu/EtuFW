@@ -10,6 +10,7 @@
 
 class Config {
 	protected $database; ///< Contains the database options
+	protected $global;   ///< Contains the global options
 	protected $routing;  ///< Contains the routing options
 	
 	/**
@@ -19,6 +20,7 @@ class Config {
 		$cfg = parse_ini_file('../config.ini', true);
 		
 		$this->database = $cfg['Database'];
+		$this->global   = $cfg['Global'];
 		$this->routing  = $cfg['Routing'];
 	}
 	
@@ -27,6 +29,13 @@ class Config {
 	 */
 	public function getDatabase() {
 		return $this->database;
+	}
+	
+	/**
+	 * @returns Array with Global configs
+	 */
+	public function getGlobal() {
+		return $this->global;
 	}
 	
 	/**
