@@ -16,31 +16,30 @@ class Controller extends BasicObject {
 	 * @param $uri The UriParser
 	 * @param $db  The Database instance
 	 */
-	public function __construct(UriParser &$uri, Db &$db) {
+	public function __construct(UriParser &$uri, Db &$db, Config &$cfg) {
 		$structure = array('name' => 'string', 'controller' => 'Object');
 		parent::__construct($db, $structure, True);
 		
+		$global = $cfg->getGlobal();
 		
-		$this->data['controller'] = new stdClass;
-		
-		if($uri->page === '')
-			$this->data['name'] = 'Start';
+		if($uri->page === '') // Select page
+			$this->data['name'] = ucfirst($global['defaultController']);
 		else
 			$this->data['name'] = ucfirst($uri->page);
 		
-		
-		$file = '../controllers/'.strtolower($this->data['name']).'.php';
-		if(file_exists($file)) {
+		$file = '../controllers/'.strtolower($this->data['name']).'.php'; // Build filename for page
+		if(file_exists($file)) { // If it exists... include it
 			require_once($file);
 			
 			$name = 'Controller'.$this->data['name'];
-			$this->data['controller'] = new $name($uri, $this->db);
+			$this->data['controller'] = new $name($uri, $this->db); // Init the controller class
 			
-			$action = $uri->action;
-			if($action === '')
-				$action = 'index';
+			if($uri->action === '') // Select method
+				$action = $global['defaultMethdod'];
+			else
+				$action = $uri->action;
 			
-			if(in_array($action, get_class_methods($this->data['controller'])))
+			if(in_array($action, get_class_methods($this->data['controller']))) // If method exists... run it
 				$this->data['controller']->$action();
 			else
 				throw new Exception('No action named: '.$action);
@@ -50,7 +49,7 @@ class Controller extends BasicObject {
 	}
 	
 	/**
-	 * Reimplemented to point to the controller inside
+	 * Reimplemented to point to the controller inside the child
 	 * 
 	 * @see BasicObject::__get
 	 */
@@ -59,7 +58,7 @@ class Controller extends BasicObject {
 	}
 	
 	/**
-	 * Reimplemented to point to the controller inside
+	 * Reimplemented to point to the controller inside the child
 	 * 
 	 * @see BasicObject::__set
 	 */
