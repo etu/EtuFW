@@ -22,6 +22,8 @@ class Config {
 		$this->database = $cfg['Database'];
 		$this->global   = $cfg['Global'];
 		$this->routing  = $cfg['Routing'];
+		
+		date_default_timezone_set($cfg['Global']['defaultTimezone']);
 	}
 	
 	/**
