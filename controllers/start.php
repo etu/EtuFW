@@ -14,10 +14,10 @@ class ControllerStart extends BasicController {
 	 * but this structure is required.
 	 * 
 	 * @param $uri UriParser instance
-	 * @param $db  Db instance
+	 * @param $orm Orm instance
 	 */
-	public function __construct(UriParser &$uri, Db &$db) {
-		parent::__construct($uri, $db);
+	public function __construct(UriParser &$uri, Orm &$orm) {
+		parent::__construct($uri, $orm);
 	}
 	
 	/**
