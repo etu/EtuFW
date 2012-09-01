@@ -18,11 +18,11 @@ set_include_path(join(':', $include_path));
 require_once('autoloader.php');
 
 $cfg = new Config();
-$db = new Db($cfg);
-$uri = new UriParser($db, $cfg);
+$orm = new Orm($cfg);
+$uri = new UriParser($orm, $cfg);
 
 try {
-	$controller = new Controller($uri, $db, $cfg);
+	$controller = new Controller($uri, $orm, $cfg);
 } catch (Exception $e) {
 	header("HTTP/1.0 404 Not Found");
 	echo $e."\n";

@@ -12,12 +12,12 @@ class UriParser extends BasicObject {
 	/**
 	 * Constructor of class...
 	 * 
-	 * @param $db Send in a Db instance if you want too
+	 * @param $orm Send in a Orm instance if you want too
 	 * @param $cfg Requires the Config class
 	 */
-	public function __construct(Db &$db, Config &$cfg) {
+	public function __construct(Orm &$orm, Config &$cfg) {
 		$structure = array('baseuri' => 'string', 'page' => 'string', 'action' => 'string', 'parts' => 'array');
-		parent::__construct($db, $structure, True);
+		parent::__construct($orm, $structure, True);
 		
 		$this->baseuri = preg_replace('/\?.*/', '', $_SERVER['REQUEST_URI']);
 		

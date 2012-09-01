@@ -14,11 +14,12 @@ class Controller extends BasicObject {
 	 * class will almost act like the controller itself.
 	 * 
 	 * @param $uri The UriParser
-	 * @param $db  The Database instance
+	 * @param $orm The Orm instance
+	 * @param $cfg The Config instance
 	 */
-	public function __construct(UriParser &$uri, Db &$db, Config &$cfg) {
+	public function __construct(UriParser &$uri, Orm &$orm, Config &$cfg) {
 		$structure = array('name' => 'string', 'controller' => 'Object');
-		parent::__construct($db, $structure, True);
+		parent::__construct($orm, $structure, True);
 		
 		$global = $cfg->getGlobal();
 		
@@ -32,7 +33,7 @@ class Controller extends BasicObject {
 			require_once($file);
 			
 			$name = 'Controller'.$this->data['name'];
-			$this->data['controller'] = new $name($uri, $this->db); // Init the controller class
+			$this->data['controller'] = new $name($uri, $this->orm); // Init the controller class
 			
 			if($uri->action === '') // Select method
 				$action = $global['defaultMethdod'];

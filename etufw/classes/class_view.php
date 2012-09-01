@@ -13,11 +13,11 @@ class View extends BasicObject {
 	 * Construction of class...
 	 * 
 	 * @param $name Name of the view you want to load
-	 * @param $db Database instance
+	 * @param $orm Orm instance
 	 */
-	public function __construct($name, Db &$db) {
+	public function __construct($name, Orm &$orm) {
 		$structure = array('data' => 'array', 'name' => 'string');
-		parent::__construct($db, $structure, True);
+		parent::__construct($orm, $structure, True);
 		
 		$this->data['name'] = strtolower($name);
 		$this->data['data'] = array();

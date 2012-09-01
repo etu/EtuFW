@@ -1,7 +1,7 @@
 <?php
 
 /**
- * BasicObject class, gives custom getters, setters and Db init stuff for all classes
+ * BasicObject class, gives custom getters, setters and Orm init stuff for all classes
  *
  * @author Elis Axelsson <elis.axelsson@gmail.com>
  * @copyright GNU Public License v3
@@ -9,7 +9,7 @@
  */
 
 abstract class BasicObject {
-	protected $db;             ///< For database instance
+	protected $orm;            ///< Orm instance
 	protected $data = array(); ///< Storage of data in the class
 	protected $strict;         ///< If the class should be strict or not in the setter
 	protected $structure;      ///< Structure of the data
@@ -17,12 +17,12 @@ abstract class BasicObject {
 	/**
 	 * Construction of class...
 	 * 
-	 * @param &$db Gets a Db class, maybe.
-	 * @param $structure Defines the structure of the data in the class
-	 * @param $strict bool Defines if the class should be strict on getters/setters or not
+	 * @param &$orm           Gets a Orm class, maybe.
+	 * @param $structure      Defines the structure of the data in the class
+	 * @param $strict    bool Defines if the class should be strict on getters/setters or not
 	 */
-	public function __construct(&$db, Array $structure = Null, $strict = False) {
-		$this->initDb($db);
+	public function __construct(&$orm, Array $structure = Null, $strict = False) {
+		$this->initOrm($orm);
 		$this->strict = $strict;
 		
 		if($structure === Null)
@@ -32,13 +32,13 @@ abstract class BasicObject {
 		
 	}
 	
-	private function initDb(&$db) {
-		if(is_object($db)) {
-			if(get_class($db) === 'Db') {
-				$this->db = $db;
+	private function initOrm(&$orm) {
+		if(is_object($orm)) {
+			if(get_class($orm) === 'Orm') {
+				$this->orm = $orm;
 			}
 		} else {
-			$this->db = new Db;
+			$this->orm = new Orm;
 		}
 	}
 	

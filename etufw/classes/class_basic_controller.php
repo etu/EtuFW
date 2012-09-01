@@ -13,11 +13,11 @@ class BasicController extends BasicObject {
 	 * Construction of class...
 	 * 
 	 * @param $uri The UriParser contains much usefull info to send on from here
-	 * @param $db  The Database instance is never bad to have
+	 * @param $orm The Orm instance is never bad to have
 	 */
-	public function __construct(UriParser &$uri, Db &$db) {
+	public function __construct(UriParser &$uri, Orm &$orm) {
 		$structure = array('uri' => 'Object');
-		parent::__construct($db, $structure, False);
+		parent::__construct($orm, $structure, False);
 		
 		$this->uri = $uri;
 	}
@@ -35,7 +35,7 @@ class BasicController extends BasicObject {
 			
 			$modelname = 'Model'.ucfirst($name);
 			
-			return new $modelname($this->db);
+			return new $modelname($this->orm);
 		} else
 			throw new Exception('No Model named: '.$name);
 	}
@@ -47,6 +47,6 @@ class BasicController extends BasicObject {
 	 * @returns A View object prepared with your viewfile
 	 */
 	protected function view($name) {
-		return new View($name, $this->db);
+		return new View($name, $this->orm);
 	}
 }
