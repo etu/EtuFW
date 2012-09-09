@@ -10,6 +10,7 @@
 
 class Config {
 	protected $database; ///< Contains the database options
+	protected $session;  ///< Contains the session options
 	protected $global;   ///< Contains the global options
 	protected $routing;  ///< Contains the routing options
 	
@@ -20,6 +21,7 @@ class Config {
 		$cfg = parse_ini_file(ROOT_DIR.'/config.ini', true);
 		
 		$this->database = $cfg['Database'];
+		$this->session  = $cfg['Session'];
 		$this->global   = $cfg['Global'];
 		$this->routing  = $cfg['Routing'];
 		
@@ -31,6 +33,17 @@ class Config {
 	 */
 	public function getDatabase() {
 		return $this->database;
+	}
+	
+	/**
+	 * @returns Array with Session configs
+	 */
+	public function getSession($key = '') {
+		if(isset($this->session[$key])) {
+			return $this->session[$key];
+		} else {
+			return $this->session;
+		}
 	}
 	
 	/**

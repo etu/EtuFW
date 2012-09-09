@@ -100,9 +100,15 @@ class OrmTable {
 			$query->execute();
 			$res = $query->fetchAll();
 			
+			if(count($res) === 0) {
+				return False;
+			}
+			
 			foreach(array_shift($res) as $key => $value) {
 				$this->data[$key] = $value;
 			}
+			
+			return True;
 		} else {
 			throw new Exception('table: '.$this->table.' does not have a column named '.$col);
 		}
@@ -126,6 +132,8 @@ class OrmTable {
 			
 			return $query->execute();
 		}
+		
+		return True;
 	}
 }
 

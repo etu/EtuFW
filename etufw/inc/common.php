@@ -1,5 +1,4 @@
 <?php
-session_start();
 
 // Some static variables defining where stuff is located
 define('ROOT_DIR', preg_replace('/\/etufw\/inc$/', '', __DIR__));
@@ -21,9 +20,16 @@ $cfg = new Config();
 $orm = new Orm($cfg);
 $uri = new UriParser($orm, $cfg);
 
+if($cfg->getSession('enabled')) {
+	$session = new Session($cfg, $orm);
+}
+
+session_start();
+
 try {
 	$controller = new Controller($uri, $orm, $cfg);
 } catch (Exception $e) {
 	header("HTTP/1.0 404 Not Found");
 	echo $e."\n";
   }
+
