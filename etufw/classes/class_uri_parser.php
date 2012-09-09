@@ -1,4 +1,5 @@
 <?php
+
 /**
  * UriParser class, parses, splits the requested URI to chunks to know what page is
  * requested.
