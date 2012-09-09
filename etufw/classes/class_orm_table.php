@@ -11,6 +11,7 @@ class OrmTable {
 	protected $orm;                ///< Orm Instance
 	protected $table;              ///< Name of table
 	protected $cols;               ///< Cols in table
+	protected $lock;               ///< String used to get LOCK on row
 	protected $loadData = array(); ///< array($data, $col) used to load row from database
 	protected $data     = array(); ///< Current data in database
 	protected $changes  = array(); ///< Changes to commit
@@ -94,10 +95,19 @@ class OrmTable {
 		if(isset($this->cols[$col])) {
 			$this->loadData = array($data, $col);
 			
-			$query = $this->orm->prepare('SELECT * FROM '.$this->table.' WHERE '.$col.' = :data');
-			$query->bindParam(':data',  $data);
+			$this->lock = $this->table.'_'.$col.'_'.$data; // Define name of lock
 			
+			$query = $this->orm->prepare('SELECT GET_LOCK(:lock, 60);');
+			$query->execute(array(':lock' => $this->lock));
+			
+			if(!$query->rowCount()) {
+				throw new Exception('table: '.$this->table.' unable to get lock on: '.$this->lock);
+			}
+			
+			$query = $this->orm->prepare('SELECT * FROM '.$this->table.' WHERE '.$col.' = :data');
+			$query->bindParam(':data', $data);
 			$query->execute();
+			
 			$res = $query->fetchAll();
 			
 			if(count($res) === 0) {
@@ -132,6 +142,10 @@ class OrmTable {
 			
 			return $query->execute();
 		}
+		
+		$query = $this->orm->prepare('SELECT RELEASE_LOCK(:lock)');
+		$query->bindParam(':lock', $this->lock);
+		$query->execute();
 		
 		return True;
 	}
