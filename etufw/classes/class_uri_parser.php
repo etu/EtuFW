@@ -10,6 +10,8 @@
  */
 
 class UriParser extends BasicObject {
+	public static $instance = Null; ///< Contains instance of object
+	
 	/**
 	 * Constructor of class...
 	 * 
@@ -31,5 +33,16 @@ class UriParser extends BasicObject {
 		$this->page   = array_shift($uriparts);
 		$this->action = array_shift($uriparts);
 		$this->parts  = $uriparts;
+	}
+	
+	/**
+	 * Singleton initiator for UriParser, use this to get the UriParser class
+	 */
+	public static function getInstance(Orm &$orm, Config &$cfg) {
+		if(!isset(self::$instance)) {
+			self::$instance = new UriParser($orm, $cfg);
+		}
+		
+		return self::$instance;
 	}
 }

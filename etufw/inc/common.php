@@ -16,12 +16,12 @@ set_include_path(join(':', $include_path));
 
 require_once('autoloader.php');
 
-$cfg = new Config();
+$cfg = Config::getInstance();
 $orm = new Orm($cfg);
-$uri = new UriParser($orm, $cfg);
+$uri = UriParser::getInstance($orm, $cfg);
 
 if($cfg->getSession('enabled')) {
-	$session = new Session($cfg, $orm);
+	$session = Session::getInstance($cfg, $orm);
 }
 
 session_start();

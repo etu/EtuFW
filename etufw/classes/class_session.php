@@ -9,10 +9,12 @@
  */
 
 class Session {
-	protected $orm;     ///< Orm instance
-	protected $table;   ///< Instance of OrmTable
-	protected $options; ///< Options for sessions
-	protected $new;     ///< True if we need to create new rows when writing
+	protected $orm;                 ///< Orm instance
+	protected $table;               ///< Instance of OrmTable
+	protected $options;             ///< Options for sessions
+	protected $new;                 ///< True if we need to create new rows when writing
+	
+	public static $instance = Null; ///< Contains instance of object
 	
 	/**
 	 * Class constructor...
@@ -33,6 +35,17 @@ class Session {
 			array($this, 'destroy'),
 			array($this, 'gc')
 		);
+	}
+	
+	/**
+	 * Singleton initiator for Session, use this to get the Session class
+	 */
+	public static function getInstance(Config &$cfg, Orm &$orm) {
+		if(!isset(self::$instance)) {
+			self::$instance = new Orm($cfg, $orm);
+		}
+		
+		return self::$instance;
 	}
 	
 	/**

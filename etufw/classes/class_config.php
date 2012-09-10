@@ -9,15 +9,17 @@
  */
 
 class Config {
-	protected $database; ///< Contains the database options
-	protected $session;  ///< Contains the session options
-	protected $global;   ///< Contains the global options
-	protected $routing;  ///< Contains the routing options
+	protected $database;            ///< Contains the database options
+	protected $session;             ///< Contains the session options
+	protected $global;              ///< Contains the global options
+	protected $routing;             ///< Contains the routing options
+	
+	public static $instance = Null; ///< Contains instance of object
 	
 	/**
 	 * Contstruction of Config, reads the ../config.ini file and parses it.
 	 */
-	public function __construct() {
+	protected function __construct() {
 		$cfg = parse_ini_file(ROOT_DIR.'/config.ini', true);
 		
 		$this->database = $cfg['Database'];
@@ -26,6 +28,17 @@ class Config {
 		$this->routing  = $cfg['Routing'];
 		
 		date_default_timezone_set($cfg['Global']['defaultTimezone']);
+	}
+	
+	/**
+	 * Singleton initiator for Config, use this to get the Config class
+	 */
+	public static function getInstance() {
+		if(!isset(self::$instance)) {
+			self::$instance = new Config();
+		}
+		
+		return self::$instance;
 	}
 	
 	/**
