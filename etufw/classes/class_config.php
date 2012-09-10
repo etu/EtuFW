@@ -20,7 +20,7 @@ class Config {
 	 * Contstruction of Config, reads the ../config.ini file and parses it.
 	 */
 	protected function __construct() {
-		$cfg = parse_ini_file(ROOT_DIR.'/config.ini', true);
+		$cfg = parse_ini_file(ETUFW.'/config.ini', true);
 		
 		$this->database = $cfg['Database'];
 		$this->session  = $cfg['Session'];
